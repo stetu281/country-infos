@@ -7,17 +7,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
 </head>
 <body>
     <header class="header">
         <div class="header__content">
-
+            <h2 class="header__logo">CountryExplorer</h2>
+            <button class="header__darkmode-btn">Dark mode</button>
         </div>
     </header>
     <main>
-
+        <section class="hero">
+            <div class="hero__content">
+                <img src="/assets/images/hero.svg" class="hero__img" alt="">
+                <h1 class="hero__title">Get Informations about any Country</h1>
+                <div class="search">
+                    <label for="input" class="search__label">Enter Country, Capital City or language</label>
+                    <input type="text" name="input" id="input" class="search__input">
+                    <button class="search__btn">Search</button>
+                </div>
+            </div>
+        </section>
     </main>
     <script src="assets/js/app.js" type="module"></script>
 </body>

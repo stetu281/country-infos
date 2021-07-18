@@ -1,8 +1,10 @@
 //Global
-@import '../scss/global/basics';
 @import '../scss/global/variables';
+@import '../scss/global/basics';
 @import '../scss/global/mixins';
 
 //sections
+@import '../scss/sections/header';
 
 //components
+@import '../scss/components/buttons';

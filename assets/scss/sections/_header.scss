@@ -1,0 +1,24 @@
+.header {
+    margin-top: 20px; 
+
+    &__content {
+        @include content;
+        @include flex;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        font-size: $regular;
+    }
+
+    &__darkmode-btn {
+        @extend button;
+        background-color: $dark;     
+    }
+
+    @include tablet {
+        &__logo {
+            font-size: 1.5rem;
+        }
+    }
+}

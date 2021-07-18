@@ -1,0 +1,27 @@
+.search {
+    @include flex;
+    flex-direction: column;
+    margin-top: 50px;
+    position: relative;
+
+    &__label {
+        font-size: 0.75rem;
+    }
+
+    &__input {
+        margin-top: 5px;
+        padding: 0.5rem 1.5rem;
+        width: 80%;
+        max-width: 300px;
+        border-radius: $radius;
+    }
+
+    &__btn {
+        margin-top: 25px;
+        background-color: $orange;
+    }
+
+    @include tablet {
+        margin-top: -100px;
+    }
+}

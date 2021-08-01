@@ -4,9 +4,10 @@ const countryList = await getCountryInfos();
 const cardContainer = document.querySelector('.information__container');
 const filters = document.querySelector('.filter');
 
+console.log(countryList)
 
 if(countryList !== undefined) {
-    render(countryList)
+    render(countryList);
     filters.addEventListener('click', delegate('.filter__btn', (e) => {
 
         toggleActiveState(e.target);
@@ -15,10 +16,16 @@ if(countryList !== undefined) {
             render(countryList);
         } else {
             const region = e.target.innerHTML;
-            const filtered = filter(region);
+            const filtered = filter(region, 'region');
             render(filtered);
         }
     }))
+
+    cardContainer.addEventListener('click', delegate('.card__button', (e) => {
+        const countryInfos = filter(e.target.dataset.country, 'alpha3Code');
+        console.log(countryInfos)
+    }))
+
 } else {
     console.log('Server nicht erreichbar anzeigen')
 }
@@ -61,7 +68,7 @@ function render(countrys) {
                         ${country.capital}
                     </li>
                 </ul>
-                <button class="card__button">Show Infos</button>
+                <button class="card__button" data-country=${country.alpha3Code}>Show Infos</button>
             </div>
         `;
 
@@ -69,8 +76,8 @@ function render(countrys) {
     }    
 }
 
-function filter(region) {
-    return countryList.filter(country => country.region === region);  
+function filter(val, opt) {
+    return countryList.filter(country => country[opt] === val);  
 }
 
 function toggleActiveState(currBtn) {

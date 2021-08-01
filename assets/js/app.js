@@ -1,7 +1,22 @@
+import { delegate } from "./tools.js";
+
 const countryList = await getCountryInfos();
 const cardContainer = document.querySelector('.information__container');
+const filters = document.querySelector('.filter');
 
-render(countryList)
+
+if(countryList !== undefined) {
+    render(countryList)
+    filters.addEventListener('click', (e) => {
+        toggleActiveState(e.target);
+        const region = e.target.innerHTML;
+        const filtered = filter(region);
+        render(filtered);
+    })
+} else {
+    console.log('Server nicht erreichbar anzeigen')
+}
+
 
 async function getCountryInfos() {
     try {
@@ -18,7 +33,6 @@ function render(countrys) {
 
     for(let country of countrys) {
 
-        console.log(country)
 
         const card = document.createElement('div');
         card.classList = 'card';
@@ -46,7 +60,16 @@ function render(countrys) {
         `;
 
         cardContainer.appendChild(card);
-    }
+    }    
+}
 
-    
+function filter(region) {
+    return countryList.filter(country => country.region === region);  
+}
+
+function toggleActiveState(currBtn) {
+    document.querySelectorAll('.filter__btn').forEach(btn => {
+        btn.classList.remove('filter__btn--active');
+    });
+    currBtn.classList.add('filter__btn--active');
 }

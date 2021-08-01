@@ -3,9 +3,17 @@
     padding: 50px 0;
     background-color: rgba($dark, .05);
 
-    &__content {
+    &__container {
         @include content;
         @include flex;
         flex-direction: column;
+        margin-top: 50px;
+    }
+
+    @include tablet {
+        &__container {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
     }
 }

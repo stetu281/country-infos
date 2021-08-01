@@ -7,12 +7,18 @@ const filters = document.querySelector('.filter');
 
 if(countryList !== undefined) {
     render(countryList)
-    filters.addEventListener('click', (e) => {
+    filters.addEventListener('click', delegate('.filter__btn', (e) => {
+
         toggleActiveState(e.target);
-        const region = e.target.innerHTML;
-        const filtered = filter(region);
-        render(filtered);
-    })
+
+        if(e.target.innerHTML === 'All') {
+            render(countryList);
+        } else {
+            const region = e.target.innerHTML;
+            const filtered = filter(region);
+            render(filtered);
+        }
+    }))
 } else {
     console.log('Server nicht erreichbar anzeigen')
 }

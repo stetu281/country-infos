@@ -16,9 +16,31 @@
         border-radius: $radius;
     }
 
+    &__radio {
+        @include flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    &__option {
+        padding: 7px 0;
+        align-self: flex-start;
+        @include flex;
+
+        & input {
+            margin-right: 10px;
+            width: 25px;
+            height: 25px;
+        }
+    }
+
     &__btn {
         margin-top: 25px;
         background-color: $orange;
+    }
+
+    &__all {
+        margin-top: 20px;
     }
 
     @include tablet {

@@ -86,15 +86,14 @@ function renderOverlay(country) {
     document.querySelector('.overlay__img').src = country.flag;
     document.querySelector('.overlay__title').innerHTML = country.name;
     document.querySelector('.overlay__list').innerHTML = `
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Capital:</span>${country.capital}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Region:</span>${country.region}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Subregion:</span>${country.subregion}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Population:</span>${country.population}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Area:</span>${country.area}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Top Level Domain:</span>${country.topLevelDomain}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Timezones:</span>${country.timezones}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Currencies:</span>${country.currencies[0].name}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Languages:</span>${country.languages}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Capital:</span> ${country.capital}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Region:</span> ${country.region}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Subregion:</span> ${country.subregion}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Population:</span> ${country.population}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Area:</span> ${country.area}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Top Level Domain:</span> ${country.topLevelDomain}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Currencies:</span> ${country.currencies[0].name}</li>
+    <li class="overlay__list-item"><span class="overlay__list-item--bold">Languages:</span> ${getLanguages(country.languages)}</li>
     `
     const borderCountrys = document.querySelector('.borders__countrys');
     borderCountrys.innerHTML = '';
@@ -126,4 +125,12 @@ function toggleActiveState(currBtn) {
         btn.classList.remove('filter__btn--active');
     });
     currBtn.classList.add('filter__btn--active');
+}
+
+function getLanguages(languages) {
+    let arr = [];
+    for(let language of languages) {
+        arr.push(language.name);
+    }
+    return arr.join(', ');
 }

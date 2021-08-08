@@ -29,6 +29,10 @@
 
     @include tablet {
 
+        &__img {
+            margin-top: -10px;
+        }
+
         &__title {
             max-width: 650px;
             font-size: 3.5rem;

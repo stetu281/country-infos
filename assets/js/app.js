@@ -68,10 +68,10 @@ document.querySelector('.search__btn-full').addEventListener('click', () => {
 document.querySelector('.filter').addEventListener('click', delegate('.filter__btn', (e) => {
     funcs.toggleActiveState(e.target);
     if(e.target.innerHTML === 'All') {
-        funcs.render(countryList);
+        funcs.render(countryListAll);
     } else {
         const region = e.target.innerHTML;
-        const filtered = funcs.filter(countryList, region, 'region');
+        const filtered = funcs.filter(countryListAll, region, 'region');
         funcs.render(filtered);
     }
 }))

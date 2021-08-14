@@ -1,11 +1,115 @@
-import { delegate } from "./tools.js";
+import * as funcs from "./functions.js";
+import { delegate, get } from "./tools.js";
 
-const countryList = await getCountryInfos();
-const cardContainer = document.querySelector('.information__container');
+let countryListAll = [];
+let countryList = [];
+const overlay = document.querySelector('.overlay');
+
+//Toggle Darkmode
+document.querySelector('.header__darkmode').addEventListener('click', (e) => {
+    e.target.classList.toggle('header__darkmode--light');
+    document.body.classList.toggle('darkmode');
+    if(e.target.classList.contains('header__darkmode--light')) {
+        e.target.innerText = "Light mode";
+    } else {
+        e.target.innerText = "Dark mode";
+    }
+});
+
+//load full countrylist at start
+get('https://restcountries.eu/rest/v2/all', function(response) {
+    countryListAll = response;
+    funcs.render(countryListAll);
+})
+
+//Search
+document.querySelector('.search__btn').addEventListener('click', () => {
+    const input = document.querySelector('.search__input');
+    const inputErr = document.querySelector('.search__input-empty');
+    let url;
+    input.style.borderColor = '#171123';
+    inputErr.innerText = '';
+
+    if(input.value !== '') {
+        const radioButtons = document.querySelectorAll('.search__option input[name="search-type"]');
+        let radioValue;
+
+        for(let button of radioButtons) {
+            if(button.checked === true) {
+                radioValue = button.value;
+            };
+        };
+
+        if(radioValue === 'country') {
+            url = `https://restcountries.eu/rest/v2/name/${input.value}`;
+
+        } else if (radioValue === 'language') {
+            url = `https://restcountries.eu/rest/v2/lang/${input.value}`;
+        } else {
+            url = `https://restcountries.eu/rest/v2/capital/${input.value}`;
+        }
+        input.value = '';
+    } else {
+        input.style.borderColor = '#ff2e2e';
+        inputErr.innerText = 'Please fill in';
+    }
+    get(url, function(response) {
+        countryList = response;
+        funcs.render(countryList);
+    })
+});
+
+//show All countrys Button
+document.querySelector('.search__btn-full').addEventListener('click', () => {
+    funcs.render(countryListAll);
+});
+
+//filter results
+document.querySelector('.filter').addEventListener('click', delegate('.filter__btn', (e) => {
+    funcs.toggleActiveState(e.target);
+    if(e.target.innerHTML === 'All') {
+        funcs.render(countryList);
+    } else {
+        const region = e.target.innerHTML;
+        console.log(countryList)
+        const filtered = funcs.filter(countryList, region, 'region');
+        funcs.render(filtered);
+    }
+}))
+
+//Show details in overlay
+document.querySelector('.information__container').addEventListener('click', delegate('.card__button', (e) => {
+    const countryInfos = funcs.filter(countryListAll, e.target.dataset.country, 'alpha3Code');
+    funcs.renderOverlay(countryListAll, countryInfos[0]);
+    overlay.classList.toggle('overlay--show');
+
+    document.querySelector('.borders__countrys').addEventListener('click', delegate('.borders__btn', (e) => {
+        let clickedCountry = funcs.filter(countryListAll, e.target.dataset.country, 'alpha3Code');
+        funcs.renderOverlay(countryListAll, clickedCountry[0]);
+    }))
+
+}))
+
+
+//Close overlay
+document.querySelector('.overlay__btn').addEventListener('click', () => {
+    overlay.classList.toggle('overlay--show');
+});
+
+
+
+
+
+
+
+/* let countryList = [];
+
 const filters = document.querySelector('.filter');
 const overlay = document.querySelector('.overlay');
 
-if(countryList !== undefined) {
+await getCountryInfos('https://restcountries.eu/rest/v2/all')
+
+if(countryList !== []) {
     render(countryList);
 
     filters.addEventListener('click', delegate('.filter__btn', (e) => {
@@ -35,102 +139,10 @@ document.querySelector('.overlay__btn').addEventListener('click', () => {
     overlay.classList.toggle('overlay--show');
 });
 
-
-async function getCountryInfos() {
-    try {
-        const response = await fetch('https://restcountries.eu/rest/v2/all');
-        return await response.json();
-    } catch (error) {
-        console.error('Error: ', error);
-    }
-}
-
-function render(countrys) {
-
-    cardContainer.innerHTML = '';
-
-    for(let country of countrys) {
-
-
-        const card = document.createElement('div');
-        card.classList = 'card';
-
-        card.innerHTML = `
-            <img src="${country.flag}" class="card__img" alt="Country Flag">
-            <div class="card__description">
-                <h2 class="card__title">${country.name}</h2>
-                <ul class="card__list">
-                    <li class="card__listitem">
-                        <span class="card__listitem--bold">
-                            Region:
-                        </span> 
-                        ${country.region}
-                    </li>
-                    <li class="card__listitem">
-                        <span class="card__listitem--bold">
-                            Capital:
-                        </span> 
-                        ${country.capital}
-                    </li>
-                </ul>
-                <button class="card__button" data-country=${country.alpha3Code}>Show Infos</button>
-            </div>
-        `;
-
-        cardContainer.appendChild(card);
-    }    
-}
-
-function renderOverlay(country) {
-
-    document.querySelector('.overlay__img').src = country.flag;
-    document.querySelector('.overlay__title').innerHTML = country.name;
-    document.querySelector('.overlay__list').innerHTML = `
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Capital:</span> ${country.capital}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Region:</span> ${country.region}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Subregion:</span> ${country.subregion}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Population:</span> ${country.population}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Area:</span> ${country.area}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Top Level Domain:</span> ${country.topLevelDomain}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Currencies:</span> ${country.currencies[0].name}</li>
-    <li class="overlay__list-item"><span class="overlay__list-item--bold">Languages:</span> ${getLanguages(country.languages)}</li>
-    `
-    const borderCountrys = document.querySelector('.borders__countrys');
-    borderCountrys.innerHTML = '';
-
-    if(country.borders.length !== 0) {
-        for(let border of country.borders) {
-            let button = document.createElement('button');
-            button.classList = 'borders__btn';
-            button.dataset.country = border;
-            let name = filter(border, 'alpha3Code');
-            button.innerHTML = name[0].name;
-            borderCountrys.appendChild(button)
-        }
-        borderCountrys.addEventListener('click', delegate('.borders__btn', (e) => {
-            let clickedCountry = filter(e.target.dataset.country, 'alpha3Code');
-            renderOverlay(clickedCountry[0]);
-        }))
-    } else {
-        borderCountrys.innerHTML = `<p class="borders__noborders">${country.name} borders no other Country</p>`;
-    }
-}
-
-function filter(val, opt) {
-    return countryList.filter(country => country[opt] === val);  
-}
-
-function toggleActiveState(currBtn) {
-    document.querySelectorAll('.filter__btn').forEach(btn => {
-        btn.classList.remove('filter__btn--active');
-    });
-    currBtn.classList.add('filter__btn--active');
-}
-
 function getLanguages(languages) {
     let arr = [];
     for(let language of languages) {
         arr.push(language.name);
     }
     return arr.join(', ');
-}
+} */

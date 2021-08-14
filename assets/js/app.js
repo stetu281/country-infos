@@ -90,59 +90,7 @@ document.querySelector('.information__container').addEventListener('click', dele
 
 }))
 
-
 //Close overlay
 document.querySelector('.overlay__btn').addEventListener('click', () => {
     overlay.classList.toggle('overlay--show');
 });
-
-
-
-
-
-
-
-/* let countryList = [];
-
-const filters = document.querySelector('.filter');
-const overlay = document.querySelector('.overlay');
-
-await getCountryInfos('https://restcountries.eu/rest/v2/all')
-
-if(countryList !== []) {
-    render(countryList);
-
-    filters.addEventListener('click', delegate('.filter__btn', (e) => {
-        toggleActiveState(e.target);
-        if(e.target.innerHTML === 'All') {
-            render(countryList);
-        } else {
-            const region = e.target.innerHTML;
-            const filtered = filter(region, 'region');
-            render(filtered);
-        }
-    }))
-
-    cardContainer.addEventListener('click', delegate('.card__button', (e) => {
-        const countryInfos = filter(e.target.dataset.country, 'alpha3Code');
-        renderOverlay(countryInfos[0]);
-        overlay.classList.toggle('overlay--show');
-
-    }))
-
-} else {
-    console.log('Server nicht erreichbar anzeigen')
-}
-
-
-document.querySelector('.overlay__btn').addEventListener('click', () => {
-    overlay.classList.toggle('overlay--show');
-});
-
-function getLanguages(languages) {
-    let arr = [];
-    for(let language of languages) {
-        arr.push(language.name);
-    }
-    return arr.join(', ');
-} */

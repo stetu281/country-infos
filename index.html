@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Document</title>
+    <title>Country Explorer</title>
 </head>
 <body>
     <div class="overlay">
@@ -32,7 +32,7 @@
     <header class="header">
         <div class="header__content">
             <h2 class="header__logo">CountryExplorer</h2>
-            <button class="header__darkmode-btn">Dark mode</button>
+            <button class="header__darkmode">Dark mode</button>
         </div>
     </header>
     <main>
@@ -43,6 +43,7 @@
                 <div class="search">
                     <label for="input" class="search__label">Enter Country, Capital City or Language</label>
                     <input type="text" name="input" id="input" class="search__input">
+                    <p class="search__input-empty"></p>
                     <div class="search__radio">
                         <span class="search__option">
                             <input type="radio" id="country" name="search-type" value="country" checked>
@@ -57,12 +58,13 @@
                             <label for="capital">for Capital City</label>
                         </span>
                     </div>
-                    <button class="search__btn">Search</button>
-                    <p class="search__all">or explore full countrylist below</p>
+                    <a href="#information"><button class="search__btn">Search</button></a>
+                    <a href="#information"><button class="search__btn-full">Show all Countrys</button></a>
+                    
                 </div>
             </div>
         </section>
-        <section class="information">
+        <section class="information" id="information">
             <div class="information__content">
                 <div class="filter">
                     <h2 class="filter__title">Filter by Region</h2>

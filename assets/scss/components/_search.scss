@@ -14,6 +14,11 @@
         width: 80%;
         max-width: 300px;
         border-radius: $radius;
+        border-color: $dark;
+    }
+
+    &__input-empty {
+        color: $red;
     }
 
     &__radio {
@@ -37,6 +42,13 @@
     &__btn {
         margin-top: 25px;
         background-color: $orange;
+    }
+
+    &__btn-full {
+        margin-top: 20px;
+        border: 2px solid $orange;
+        background-color: transparent;
+        color: $orange;
     }
 
     &__all {

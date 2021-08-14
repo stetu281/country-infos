@@ -19,9 +19,16 @@
         font-size: $regular;
     }
 
-    &__darkmode-btn {
+    &__darkmode {
         @extend button;
-        background-color: $dark;     
+        background-color: $dark;
+        border: 2px solid $dark;
+        
+        &--light {
+            background-color: $white;
+            color: $dark;
+            font-weight: 600;
+        }
     }
 
     @include tablet {

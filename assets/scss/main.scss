@@ -2,6 +2,7 @@
 @import '../scss/global/variables';
 @import '../scss/global/basics';
 @import '../scss/global/mixins';
+@import '../scss/global/buttons';
 
 //sections
 @import '../scss/sections/header';
@@ -9,7 +10,6 @@
 @import '../scss/sections/information';
 
 //components
-@import '../scss/components/buttons';
 @import '../scss/components/search';
 @import '../scss/components/filter';
 @import '../scss/components/card';

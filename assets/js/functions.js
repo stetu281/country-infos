@@ -4,8 +4,6 @@ export const render = (countrys) => {
 
     cardContainer.innerHTML = '';
 
-    console.log(countrys)
-
     if(countrys.status !== 404) {
         for(const [index, country] of Object.entries(countrys)) {
 
@@ -47,8 +45,6 @@ export const render = (countrys) => {
 
 export const renderOverlay = (countryListAll, country) => {
 
-    console.log(country)
-
     document.querySelector('.overlay__img').src = country.flag;
     document.querySelector('.overlay__title').innerHTML = country.name;
     document.querySelector('.overlay__list').innerHTML = `
@@ -65,7 +61,6 @@ export const renderOverlay = (countryListAll, country) => {
     borderCountrys.innerHTML = '';
 
     if(country.borders.length !== 0) {
-        console.log(country.borders)
         for(let border of country.borders) {
             let button = document.createElement('button');
             button.classList = 'borders__btn';

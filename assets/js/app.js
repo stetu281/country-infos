@@ -71,7 +71,6 @@ document.querySelector('.filter').addEventListener('click', delegate('.filter__b
         funcs.render(countryList);
     } else {
         const region = e.target.innerHTML;
-        console.log(countryList)
         const filtered = funcs.filter(countryList, region, 'region');
         funcs.render(filtered);
     }

@@ -9,6 +9,12 @@
         margin-top: 50px;
     }
 
+    &__error {
+        font-size: 2rem;
+        font-weight: 700;
+        padding: 30px 0;
+    }
+
     @include tablet {
         &__container {
             flex-direction: row;

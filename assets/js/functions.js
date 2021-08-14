@@ -4,34 +4,45 @@ export const render = (countrys) => {
 
     cardContainer.innerHTML = '';
 
-    for(const [index, country] of Object.entries(countrys)) {
+    console.log(countrys)
 
-        const card = document.createElement('div');
-        card.classList = 'card';
-  
-        card.innerHTML = `
-        <img src="${country.flag}" class="card__img" alt="Country Flag">
-        <div class="card__description">
-            <h2 class="card__title">${country.name}</h2>
-            <ul class="card__list">
-                <li class="card__listitem">
-                    <span class="card__listitem--bold">
-                        Region:
-                    </span> 
-                    ${country.region}
-                </li>
-                <li class="card__listitem">
-                    <span class="card__listitem--bold">
-                        Capital:
-                    </span> 
-                    ${country.capital}
-                </li>
-            </ul>
-            <button class="card__button" data-country=${country.alpha3Code}>Show Infos</button>
-        </div>
-    `;
-    cardContainer.appendChild(card);
-    }; 
+    if(countrys.status !== 404) {
+        for(const [index, country] of Object.entries(countrys)) {
+
+            const card = document.createElement('div');
+            card.classList = 'card';
+      
+            card.innerHTML = `
+            <img src="${country.flag}" class="card__img" alt="Country Flag">
+            <div class="card__description">
+                <h2 class="card__title">${country.name}</h2>
+                <ul class="card__list">
+                    <li class="card__listitem">
+                        <span class="card__listitem--bold">
+                            Region:
+                        </span> 
+                        ${country.region}
+                    </li>
+                    <li class="card__listitem">
+                        <span class="card__listitem--bold">
+                            Capital:
+                        </span> 
+                        ${country.capital}
+                    </li>
+                </ul>
+                <button class="card__button" data-country=${country.alpha3Code}>Show Infos</button>
+            </div>
+        `;
+        cardContainer.appendChild(card);
+        };
+    } else {
+        let nothing = document.createElement('p');
+        nothing.classList.add('information__error');
+        nothing.innerHTML = 'Sorry, nothing found';
+        cardContainer.appendChild(nothing);
+    }
+
+ 
 };
 
 export const renderOverlay = (countryListAll, country) => {

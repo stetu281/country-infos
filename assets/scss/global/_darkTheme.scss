@@ -1,0 +1,51 @@
+.darkmode {
+    color: $white;
+
+    header {
+        background-color: $dark;
+    }
+
+    .hero {
+        background-color: $dark;
+
+        &__title {
+            color: $white;
+        }
+    }
+
+    .information {
+        background-color: darken($dark, 10%);
+
+        .filter__btn {
+            border-color: $white;
+            color: $white;
+
+            &--active {
+                border-color: $orange;
+                color: $orange;
+            }
+        }
+
+        .card {
+            background-color: lighten($dark, 10%);
+        }
+    }
+
+    .overlay {
+        background-color: $dark;
+
+        .borders {
+            background-color: lighten($dark, 10%);
+
+            &__btn {
+                border-color: $white;
+                color: $white;
+
+                &:hover {
+                    border-color: $orange;
+                    color: $orange;
+                }
+            }
+        }
+    }
+}

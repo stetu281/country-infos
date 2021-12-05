@@ -17,7 +17,7 @@ document.querySelector('.header__darkmode').addEventListener('click', (e) => {
 });
 
 //load full countrylist at start
-get('https://restcountries.eu/rest/v2/all', function(response) {
+get('https://restcountries.com/v2/all', function(response) {
     countryListAll = response;
     funcs.render(countryListAll);
 })
@@ -41,12 +41,12 @@ document.querySelector('.search__btn').addEventListener('click', () => {
         };
 
         if(radioValue === 'country') {
-            url = `https://restcountries.eu/rest/v2/name/${input.value}`;
+            url = `https://restcountries.com/v2/name/${input.value}`;
 
         } else if (radioValue === 'language') {
-            url = `https://restcountries.eu/rest/v2/lang/${input.value}`;
+            url = `https://restcountries.com/v2/lang/${input.value}`;
         } else {
-            url = `https://restcountries.eu/rest/v2/capital/${input.value}`;
+            url = `https://restcountries.com/v2/capital/${input.value}`;
         }
         input.value = '';
     } else {

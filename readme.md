@@ -1,6 +1,6 @@
 # Country Information
 
-Website to find country information. Information is pulled from the [Rest Countries API](https://restcountries.eu/).
+Website to find country information. Information is pulled from the [Rest Countries API](https://restcountries.com/).
 
 Built with: HTML, Scss, BEM, Javascript
 

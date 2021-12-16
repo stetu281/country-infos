@@ -60,7 +60,7 @@ export const renderOverlay = (countryListAll, country) => {
     const borderCountrys = document.querySelector('.borders__countrys');
     borderCountrys.innerHTML = '';
 
-    if(country.borders.length !== 0) {
+    if(country.borders && country.borders.length !== 0) {
         for(let border of country.borders) {
             let button = document.createElement('button');
             button.classList = 'borders__btn';
